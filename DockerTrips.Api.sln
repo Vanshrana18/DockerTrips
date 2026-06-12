@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 18
+VisualStudioVersion = 18.6.11822.322 stable
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DockerTrips.Api", "DockerTrips.Api.csproj", "{1540F91E-397F-7853-C25E-2C8E61C4FE4F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1540F91E-397F-7853-C25E-2C8E61C4FE4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1540F91E-397F-7853-C25E-2C8E61C4FE4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1540F91E-397F-7853-C25E-2C8E61C4FE4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1540F91E-397F-7853-C25E-2C8E61C4FE4F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {58071BBE-437F-47D0-8401-279A1F06E24B}
+	EndGlobalSection
+EndGlobal
