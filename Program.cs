@@ -18,6 +18,7 @@ var app = builder.Build();
 
 
 
+
 app.MapPost("/trips", async (Trip trip, AppDbContext db) =>
 {
     db.Trips.Add(trip);
