@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: sqlserver
+
+spec:
+  serviceName: {{ .Values.sql.serviceName }}
+
+  replicas: {{ .Values.sql.replicas }}
+
+  selector:
+    matchLabels:
+      app: sqlserver
+
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+
+    spec:
+      containers:
+      - name: sqlserver
+
+        image: {{ .Values.sql.image }}
+
+        ports:
+        - containerPort: {{ .Values.sql.port }}
+
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+
+        - name: MSSQL_SA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: trips-secret
+              key: DB_PASSWORD
+
+        resources:
+          requests:
+            cpu: {{ .Values.sql.resources.requests.cpu | quote }}
+            memory: {{ .Values.sql.resources.requests.memory | quote }}
+
+          limits:
+            cpu: {{ .Values.sql.resources.limits.cpu | quote }}
+            memory: {{ .Values.sql.resources.limits.memory | quote }}
+
+        volumeMounts:
+        - name: sql-data
+          mountPath: /var/opt/mssql
+
+  volumeClaimTemplates:
+  - metadata:
+      name: sql-data
+
+    spec:
+      accessModes:
+      - ReadWriteOnce
+
+      resources:
+        requests:
+          storage: {{ .Values.sql.storage }}

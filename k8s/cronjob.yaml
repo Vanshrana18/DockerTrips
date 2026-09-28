@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+
+metadata:
+  name: nightly-backup
+
+spec:
+  schedule: "0 2 * * *"
+
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: backup
+            image: busybox
+            command:
+            - sh
+            - -c
+            - echo "Database Backup"
+
+          restartPolicy: Never

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: trips-config
+  namespace: dockertrips
+
+data:
+  DB_SERVER: "sqlserver"
+  DB_NAME: DockerTripsDb

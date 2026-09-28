@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: trips-api
+
+spec:
+  replicas: {{ .Values.replicaCount }}
+
+  selector:
+    matchLabels:
+      app: trips-api
+
+  template:
+    metadata:
+      labels:
+        app: trips-api
+
+    spec:
+      containers:
+      - name: trips-api
+
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+
+        ports:
+        - containerPort: {{ .Values.service.port }}
+
+        env:
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: trips-config
+              key: DB_SERVER
+
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: trips-config
+              key: DB_NAME
+
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: trips-secret
+              key: DB_USER
+
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: trips-secret
+              key: DB_PASSWORD
+
+        resources:
+          requests:
+            cpu: {{ .Values.resources.requests.cpu | quote }}
+            memory: {{ .Values.resources.requests.memory | quote }}
+
+          limits:
+            cpu: {{ .Values.resources.limits.cpu | quote }}
+            memory: {{ .Values.resources.limits.memory | quote }}

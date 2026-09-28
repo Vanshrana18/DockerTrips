@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: trips-config
+
+data:
+  DB_SERVER: "{{ .Values.config.DB_SERVER }}"
+  DB_NAME: "{{ .Values.config.DB_NAME }}"

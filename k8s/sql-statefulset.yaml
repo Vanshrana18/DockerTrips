@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: StatefulSet
+
+metadata:
+  name: sqlserver
+  namespace: dockertrips
+
+spec:
+  serviceName: sqlserver
+
+  replicas: 3
+
+  selector:
+    matchLabels:
+      app: sqlserver
+
+  template:
+    metadata:
+      labels:
+        app: sqlserver
+
+    spec:
+      containers:
+      - name: sqlserver
+
+        image: mcr.microsoft.com/mssql/server:2022-latest
+
+        ports:
+        - containerPort: 1433
+
+        env:
+        - name: ACCEPT_EULA
+          value: "Y"
+
+        - name: MSSQL_SA_PASSWORD
+          value: "YourStrongPassword123!"
+
+        volumeMounts:
+        - name: sql-storage
+          mountPath: /var/opt/mssql
+
+  volumeClaimTemplates:
+  - metadata:
+      name: sql-storage
+
+    spec:
+      accessModes:
+      - ReadWriteOnce
+
+      resources:
+        requests:
+          storage: 10Gi
